@@ -17,3 +17,7 @@ Frontend/node_modules
 application_default_credentials.json
 gcp-key
 gcp-key.pub
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl
+.terraform
