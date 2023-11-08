@@ -5,11 +5,25 @@ provider "google" {
   credentials = file(var.credentials_file_path)
 }
 
+resource "google_compute_firewall" "allow_http_3000" {
+  allow {
+    ports    = ["3000"]
+    protocol = "tcp"
+  }
+  direction     = "INGRESS"
+  name          = "allow-http-3000"
+  network       = "https://www.googleapis.com/compute/v1/projects/employee-management-404119/global/networks/default"
+  priority      = 1000
+  project       = "employee-management-404119"
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["allow-http-3000"]
+}
+
 resource "google_compute_instance" "terraform_vm" {
   name         = "terraform-vm"
   machine_type = var.machine_type
   zone         = var.zone
-  tags         = ["http-server"]
+  tags         = ["allow-http-3000", "default-allow-ssh"]
 
   metadata = {
     ssh-keys = "${var.user}:${file(var.public_key_path)}"
@@ -36,26 +50,7 @@ resource "google_compute_instance" "terraform_vm" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt update",
-      "sudo apt install -y build-essential",
-      "sudo apt install -y git",
-      "sudo apt install -y docker docker-compose",
-      "sudo systemctl start docker",
-      "git clone https://github.com/xavgar9/EmployeeManagementTerraform",
-      "cd EmployeeManagementTerraform",
-      "sudo make run",
-      "sudo make run-migrations",
+      "make install-basics",
     ]
   }
-}
-
-resource "google_compute_firewall" "allow-http-ssh" {
-  name    = "terraform-vm-firewall"
-  network = "default"
-  allow {
-    protocol = "tcp"
-    ports    = ["80", "22", "3000"]
-  }
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["allow-http-ssh"]
 }
