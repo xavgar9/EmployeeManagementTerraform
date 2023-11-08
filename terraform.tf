@@ -50,7 +50,9 @@ resource "google_compute_instance" "terraform_vm" {
 
   provisioner "remote-exec" {
     inline = [
-      "make install-basics",
+      "sudo apt update",
+      "sudo apt install -y build-essential",
+      "sudo make install-basics",
     ]
   }
 }

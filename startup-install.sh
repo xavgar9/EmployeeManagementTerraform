@@ -1,6 +1,4 @@
 # Install basic packages
-sudo apt update
-sudo apt install -y build-essential
 sudo apt install -y git
 
 # Install packages to allow apt to use a repository over HTTPS
