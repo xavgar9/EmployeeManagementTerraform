@@ -1,6 +1,6 @@
-install-basics:
-	@echo "Initializing project..."
-	@./startup-install.sh
+install-docker:
+	@echo "Installing docker..."
+	@./install-docker.sh
 
 run:
 	@echo "Building and running containers with docker-compose..."

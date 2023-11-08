@@ -52,7 +52,10 @@ resource "google_compute_instance" "terraform_vm" {
     inline = [
       "sudo apt update",
       "sudo apt install -y build-essential",
-      "sudo make install-basics",
+      "sudo apt install -y git",
+      "git clone https://github.com/xavgar9/EmployeeManagementTerraform",
+      "cd EmployeeManagementTerraform",
+      "sudo make install-docker",
     ]
   }
 }
