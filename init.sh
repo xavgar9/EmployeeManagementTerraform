@@ -1,5 +1,4 @@
 #!/bin/bash
-
 Build the backend image
 echo "Building backend image..."
 docker pull xavgar9/employee-management-backend:latest

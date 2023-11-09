@@ -25,6 +25,9 @@ resource "google_compute_instance" "terraform_vm" {
   zone         = var.zone
   tags         = ["allow-http-3000", "default-allow-ssh"]
 
+  metadata_startup_script = "mkdir -p /home/hyperledger/tmp/;sudo mount -t tmpfs -o size=100M tmpfs /home/hyperledger/tmp/"
+
+
   metadata = {
     ssh-keys = "${var.user}:${file(var.public_key_path)}"
   }
@@ -49,15 +52,17 @@ resource "google_compute_instance" "terraform_vm" {
   }
 
   provisioner "remote-exec" {
+    connection {
+      type        = "ssh"
+      private_key = file(var.private_key_path)
+      user        = var.user
+      host        = google_compute_instance.terraform_vm.network_interface.0.access_config.0.nat_ip
+      script_path = "/home/hyperledger/tmp/provision.sh"
+    }
+
     inline = [
-      "sudo apt update",
-      "sudo apt install -y build-essential",
-      "sudo apt install -y git",
-      "git clone https://github.com/xavgar9/EmployeeManagementTerraform",
-      "cd EmployeeManagementTerraform",
-      "sudo make install-docker",
-      "sudo make run",
-      "sudo make run-migrations"
+      "sudo chown -R hyperledger:hyperledger /home/hyperledger",
+      "/home/hyperledger/tmp/provision.sh",
     ]
   }
 }
