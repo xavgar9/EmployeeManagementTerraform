@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Build the backend image
-# echo "Building backend image..."
-# docker pull xavgar9/employee-management-backend:latest
+Build the backend image
+echo "Building backend image..."
+docker pull xavgar9/employee-management-backend:latest
 
 # Build the frontend image
 echo "Building frontend image..."
