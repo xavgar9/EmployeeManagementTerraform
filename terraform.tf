@@ -12,9 +12,9 @@ resource "google_compute_firewall" "allow_http_3000" {
   }
   direction     = "INGRESS"
   name          = "allow-http-3000"
-  network       = "https://www.googleapis.com/compute/v1/projects/employee-management-404119/global/networks/default"
+  network       = "https://www.googleapis.com/compute/v1/projects/${var.project}/global/networks/default"
   priority      = 1000
-  project       = "employee-management-404119"
+  project       = var.project
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["allow-http-3000"]
 }
@@ -56,6 +56,8 @@ resource "google_compute_instance" "terraform_vm" {
       "git clone https://github.com/xavgar9/EmployeeManagementTerraform",
       "cd EmployeeManagementTerraform",
       "sudo make install-docker",
+      "sudo make run",
+      "sudo make run-migrations"
     ]
   }
 }

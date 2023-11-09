@@ -1,7 +1,7 @@
 variable "project" {
   type        = string
   description = "The project ID to deploy to"
-  default     = "employee-management-404119"
+  default     = "western-trees-404602"
 }
 
 variable "region" {
@@ -20,7 +20,7 @@ variable "zone" {
 variable "machine_type" {
   type        = string
   description = "The machine type to deploy to"
-  default     = "e2-micro"
+  default     = "e2-medium"
 }
 
 variable "image" {
@@ -42,7 +42,7 @@ variable "user" {
 
 variable "email" {
   type    = string
-  default = "xavgar9@gmail.com"
+  default = "xavier.garzon.pro@gmail.com"
 }
 variable "private_key_path" {
   type    = string
