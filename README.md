@@ -4,6 +4,10 @@
 
 This project involves the migration of a simple three-layer web application for employee management to Google Cloud Platform (GCP). The application consists of a frontend (React), a backend (Go), and a MySQL database. [Go here](https://github.com/xavgar9/EmployeeManagement) for more info.
 
+The migration strategy employed for this project aligns with Gartner's recommended approach:
+
+- **Rehost:** Involves redeploying applications to a different hardware environment while making changes to the application's infrastructure configuration without making significant changes to its architecture.
+
 ## Original Software architecture
 
 The original software was built using API REST in a Layered Architecture.
