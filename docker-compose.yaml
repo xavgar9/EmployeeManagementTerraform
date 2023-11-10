@@ -8,6 +8,8 @@ services:
       - 3000:3000
     depends_on:
       - backend
+    environment:
+      - REACT_APP_BACKEND_HOST=${REACT_APP_BACKEND_HOST}
   backend:
     container_name: backend
     image: xavgar9/employee-management-backend
