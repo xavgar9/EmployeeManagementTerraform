@@ -73,14 +73,7 @@ resource "google_compute_instance" "terraform_vm" {
       "sudo docker pull xavgar9/employee-management-frontend:latest",
 
       "echo \"Starting containers with docker-compose...\"",
-      "sudo export REACT_APP_BACKEND_HOST=http://${google_compute_instance.terraform_vm.network_interface.0.access_config.0.nat_ip}:8080",
       "sudo docker compose up -d",
-
-      "echo \"Running migration...\"",
-      "sudo -u root docker exec -i db mysql -uroot -proot -e 'CREATE DATABASE IF NOT EXISTS employeemanagement;'",
-      "sudo -u root docker exec -i db mysql -uroot -proot employeemanagement < ./scripts/CreateDB.sql",
-      "sudo -u root docker exec -i db mysql -uroot -proot employeemanagement < ./scripts/FunctionsProcedures.sql",
-      "sudo -u root docker exec -i db mysql -uroot -proot employeemanagement < ./scripts/ResetDB.sql",
     ]
   }
 }

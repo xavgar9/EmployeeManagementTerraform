@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS employeemanagement;
+USE employeemanagement;
+
 -- tables
 -- Table: Area
 CREATE TABLE IF NOT EXISTS Area (

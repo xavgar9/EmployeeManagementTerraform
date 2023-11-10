@@ -1,3 +1,4 @@
+USE employeemanagement;
 DELETE FROM Users;
 ALTER TABLE Users AUTO_INCREMENT = 1;
 DELETE FROM IdTypes;
